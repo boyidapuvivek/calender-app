@@ -1,4 +1,3 @@
-// components/CalendarHeader.jsx
 import React from "react";
 import { Calendar, Plus } from "lucide-react";
 import { formatMonthYear } from "../utils/dateUtils";

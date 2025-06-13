@@ -1,4 +1,3 @@
-// components/CalendarDay.jsx
 import React from "react";
 import { getDayEvents, getOverlappingEvents } from "../utils/eventUtils";
 
@@ -20,31 +19,34 @@ const CalendarDay = ({ date, events, isCurrentMonth, isToday, onDayClick }) => {
 
   return (
     <div
-      className={`min-h-32 p-3 border-b border-r cursor-pointer hover:bg-gray-50 transition-colors ${
-        !isCurrentMonth ? "bg-gray-50 text-gray-400" : "bg-white"
-      } ${isToday ? "bg-blue-50 border-blue-200" : ""}`}
+      className={`bg-white p-2 min-h-[100px] flex flex-col justify-start cursor-pointer transition hover:bg-gray-50
+        ${!isCurrentMonth ? "text-gray-400 bg-gray-50" : ""}
+        ${isToday ? "border-2 border-blue-500 rounded-md bg-blue-50" : ""}`}
       onClick={() => onDayClick(date)}>
+      {/* Date Label */}
       <div
-        className={`text-sm mb-2 ${
-          isToday ? "font-semibold text-blue-600" : ""
+        className={`text-sm font-medium mb-1 ${
+          isToday ? "text-blue-600" : ""
         }`}>
         {date.getDate()}
         {isToday && (
-          <div className='w-2 h-2 bg-red-500 rounded-full inline-block ml-2'></div>
+          <span className='ml-2 inline-block w-2 h-2 bg-red-500 rounded-full'></span>
         )}
       </div>
 
+      {/* Events */}
       <div className='space-y-1'>
         {dayEvents.slice(0, 3).map((event) => (
           <div
             key={event.id}
-            className={`text-xs p-2 rounded-md bg-opacity-10 border-l-2 ${getEventStyles(
+            className={`text-xs p-1.5 rounded-md bg-opacity-10 border-l-2 truncate ${getEventStyles(
               event.type
             )} ${overlappingIds.has(event.id) ? "opacity-75" : ""}`}>
             <div className='font-medium truncate'>{event.title}</div>
-            <div className='text-xs opacity-75'>{event.time}</div>
+            <div className='text-[10px] opacity-70'>{event.time}</div>
           </div>
         ))}
+
         {dayEvents.length > 3 && (
           <div className='text-xs text-gray-500 text-center'>
             +{dayEvents.length - 3} more

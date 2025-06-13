@@ -1,4 +1,3 @@
-// utils/eventUtils.js
 import { isSameDay } from "./dateUtils";
 
 export const getDayEvents = (date, events) => {
@@ -73,10 +72,25 @@ export const INITIAL_EVENTS = [
 ];
 
 export const EVENT_TYPES = [
-  { type: "work", label: "Work", color: "purple" },
-  { type: "personal", label: "Personal", color: "blue" },
-  { type: "social", label: "Social", color: "orange" },
-  { type: "health", label: "Health", color: "green" },
-  { type: "family", label: "Family", color: "pink" },
-  { type: "travel", label: "Travel", color: "cyan" },
+  { type: "work", label: "Work", color: "purple", color: "bg-purple-600" },
+  {
+    type: "personal",
+    label: "Personal",
+
+    color: "bg-blue-600",
+  },
+  {
+    type: "social",
+    label: "Social",
+
+    color: "bg-orange-600",
+  },
+  {
+    type: "health",
+    label: "Health",
+
+    color: "bg-green-600",
+  },
+  { type: "family", label: "Family", color: "bg-pink-600" },
+  { type: "travel", label: "Travel", color: "bg-cyan-600" },
 ];

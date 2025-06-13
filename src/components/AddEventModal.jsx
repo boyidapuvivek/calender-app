@@ -1,4 +1,3 @@
-// components/AddEventModal.jsx
 import React from "react";
 import { X } from "lucide-react";
 import { EVENT_TYPES } from "../utils/eventUtils";
@@ -16,6 +15,29 @@ const AddEventModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddEvent();
+  };
+
+  const formatDateForInput = (date) => {
+    if (!date) return "";
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const handleDateChange = (e) => {
+    const dateString = e.target.value;
+    if (!dateString) return;
+
+    const [year, month, day] = dateString.split("-").map(Number);
+    const selectedDate = new Date(year, month - 1, day);
+
+    if (newEvent.date) {
+      selectedDate.setHours(newEvent.date.getHours());
+      selectedDate.setMinutes(newEvent.date.getMinutes());
+    }
+    setNewEvent({ ...newEvent, date: selectedDate });
   };
 
   return (
@@ -45,6 +67,19 @@ const AddEventModal = ({
               }
               className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
               placeholder='Enter event title'
+              required
+            />
+          </div>
+
+          <div>
+            <label className='block text-sm font-medium text-gray-700 mb-2'>
+              Date
+            </label>
+            <input
+              type='date'
+              value={formatDateForInput(newEvent.date || selectedDate)}
+              onChange={handleDateChange}
+              className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
               required
             />
           </div>
@@ -97,12 +132,6 @@ const AddEventModal = ({
               placeholder='Event description (optional)'
             />
           </div>
-
-          {selectedDate && (
-            <div className='text-sm text-gray-600'>
-              Date: {selectedDate.toLocaleDateString()}
-            </div>
-          )}
 
           <div className='flex gap-3 pt-4'>
             <button

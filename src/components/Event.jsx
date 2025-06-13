@@ -1,7 +1,7 @@
 import React from "react";
 
 const Event = ({ event, isOverlapping }) => {
-  const eventType e= event.type || "work";
+  const eventType = event.type || "work";
   const typeClasses = {
     work: "event-work",
     personal: "event-personal",

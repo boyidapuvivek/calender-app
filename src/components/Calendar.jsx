@@ -1,4 +1,3 @@
-// components/Calendar.jsx
 import React, { useState } from "react";
 import CalendarHeader from "./CalendarHeader";
 import CalendarGrid from "./CalendarGrid";
@@ -16,6 +15,7 @@ const Calendar = () => {
     time: "",
     type: "work",
     description: "",
+    date: null,
   });
 
   const handleMonthChange = (months) => {
@@ -25,11 +25,21 @@ const Calendar = () => {
   };
 
   const handleAddEvent = () => {
-    if (newEvent.title && selectedDate) {
+    if (newEvent.title && (newEvent.date || selectedDate)) {
+      const eventDate = newEvent.date || selectedDate;
+
+      const formatDate = (date) => {
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      };
+
       const event = {
         id: Date.now(),
         title: newEvent.title,
-        date: selectedDate.toISOString().split("T")[0],
+        date: formatDate(eventDate),
         time: newEvent.time,
         type: newEvent.type,
         description: newEvent.description,
@@ -40,7 +50,13 @@ const Calendar = () => {
   };
 
   const resetEventForm = () => {
-    setNewEvent({ title: "", time: "", type: "work", description: "" });
+    setNewEvent({
+      title: "",
+      time: "",
+      type: "work",
+      description: "",
+      date: null,
+    });
     setShowAddEvent(false);
     setSelectedDate(null);
   };
@@ -52,6 +68,7 @@ const Calendar = () => {
       handleMonthChange(1);
     } else {
       setSelectedDate(day);
+      setNewEvent((prev) => ({ ...prev, date: day }));
       setShowAddEvent(true);
     }
   };

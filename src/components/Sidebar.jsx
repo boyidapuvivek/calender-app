@@ -1,4 +1,3 @@
-// components/Sidebar.jsx
 import React from "react";
 import { Clock, Briefcase, Users, Heart, Plane, Home } from "lucide-react";
 import {
@@ -23,7 +22,6 @@ const Sidebar = ({ events }) => {
 
   return (
     <div className='space-y-6'>
-      {/* Today's Events */}
       <div className='bg-white rounded-xl shadow-sm p-6'>
         <h3 className='text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2'>
           <Clock size={20} />
@@ -52,7 +50,6 @@ const Sidebar = ({ events }) => {
         )}
       </div>
 
-      {/* Upcoming Events */}
       <div className='bg-white rounded-xl shadow-sm p-6'>
         <h3 className='text-lg font-semibold text-gray-800 mb-4'>
           Upcoming Events
@@ -78,7 +75,6 @@ const Sidebar = ({ events }) => {
         </div>
       </div>
 
-      {/* Event Categories */}
       <div className='bg-white rounded-xl shadow-sm p-6'>
         <h3 className='text-lg font-semibold text-gray-800 mb-4'>
           Event Categories
@@ -88,7 +84,7 @@ const Sidebar = ({ events }) => {
             <div
               key={type}
               className='flex items-center gap-3'>
-              <div className={`w-3 h-3 rounded-full bg-${color}-500`}></div>
+              <div className={`w-3 h-3 rounded-full ${color}`}></div>
               <span className='text-sm text-gray-700'>{label}</span>
             </div>
           ))}
