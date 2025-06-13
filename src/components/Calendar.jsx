@@ -74,6 +74,9 @@ const Calendar = () => {
   };
 
   const handleShowAddEvent = () => {
+    const today = new Date();
+    setSelectedDate(today);
+    setNewEvent((prev) => ({ ...prev, date: today }));
     setShowAddEvent(true);
   };
 
